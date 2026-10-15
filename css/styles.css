@@ -1,0 +1,196 @@
+/* Enabler-S landing page
+   Black marble and brushed gold, taken from the logo. One column, centred:
+   hero (logo at the centre of the pillar orbit) → eight pillar discs orbiting the logo → detail panel → contact. */
+/* Ginelo (Elegant Luxury Serif) for the Enabler-S name at the centre of the orbit. It is a licensed font, so it is not bundled:
+   drop Ginelo.woff2 / .otf / .ttf into webpage1/fonts/ (or have it installed) and it is picked up.
+   Until then the name falls back to Cormorant Garamond. */
+@font-face {
+  font-family: "Ginelo";
+  src: local("Ginelo"), local("Ginelo Regular"), local("Ginelo-Regular"),
+       url("../fonts/Ginelo.woff2") format("woff2"), url("../fonts/Ginelo.woff") format("woff"),
+       url("../fonts/Ginelo.otf") format("opentype"), url("../fonts/Ginelo.ttf") format("truetype");
+  font-display: swap;
+}
+
+/* Luxento (Luxury Serif) for the Enabler-S name in the main navigation. Also licensed: drop
+   Luxento.woff2 / .otf / .ttf into webpage1/fonts/ (or have it installed). Falls back to Cormorant Garamond. */
+@font-face {
+  font-family: "Luxento";
+  src: local("Luxento"), local("Luxento Regular"), local("Luxento-Regular"),
+       url("../fonts/Luxento.woff2") format("woff2"), url("../fonts/Luxento.woff") format("woff"),
+       url("../fonts/Luxento.otf") format("opentype"), url("../fonts/Luxento.ttf") format("truetype");
+  font-display: swap;
+}
+
+:root {
+  --bg: #070605;
+  --bg-2: #110e0a;
+  --gold: #d4ae5c;
+  --gold-hi: #f3d995;
+  --gold-lo: #8a6528;
+  --text: #efe7d6;
+  --muted: rgba(239, 231, 214, 0.62);
+  --line: rgba(212, 174, 92, 0.28);
+  --sans: "Jost", "Futura", "Century Gothic", system-ui, sans-serif;
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --brand-font: "Ginelo", "Cormorant Garamond", Georgia, serif;
+  --nav-font: "Luxento", "Cormorant Garamond", Georgia, serif;
+  --gutter: clamp(16px, 4vw, 40px);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0; min-height: 100vh; overflow-x: hidden;
+  background:
+    radial-gradient(ellipse 60% 45% at 50% 32%, rgba(212, 174, 92, 0.10), transparent 70%),
+    radial-gradient(ellipse 120% 80% at 50% 120%, #15100a, transparent 60%),
+    var(--bg);
+  color: var(--text); font: 400 1.0625rem/1.6 var(--sans);
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+h1, h2, h3, p { margin: 0; }
+ul { margin: 0; padding: 0; list-style: none; }
+em { font: italic 500 1.08em var(--serif); color: var(--gold-hi); }
+:focus-visible { outline: 2px solid var(--gold-hi); outline-offset: 4px; border-radius: 6px; }
+
+.marble { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.22; pointer-events: none; }
+
+.eyebrow { font-size: 0.74rem; font-weight: 500; letter-spacing: 0.34em; text-transform: uppercase; color: var(--gold); }
+
+/* ---------- buttons ---------- */
+.btn { display: inline-flex; align-items: center; gap: 8px; border: 0; border-radius: 999px; cursor: pointer;
+  font: 500 0.95rem/1 var(--sans); letter-spacing: 0.03em; padding: 14px 22px; text-decoration: none;
+  transition: transform .2s, background .2s, box-shadow .2s; }
+.btn:hover { transform: translateY(-1px); }
+.btn-gold { color: #1a1206; background: linear-gradient(180deg, var(--gold-hi), var(--gold) 55%, #b48a3c); box-shadow: 0 6px 24px rgba(212, 174, 92, 0.25); }
+.btn-gold:hover { box-shadow: 0 8px 30px rgba(212, 174, 92, 0.4); }
+.btn-ghost { color: var(--text); background: rgba(255, 255, 255, 0.04); box-shadow: inset 0 0 0 1px var(--line); }
+.btn-ghost:hover { background: rgba(212, 174, 92, 0.1); }
+.btn-sm { padding: 10px 16px; font-size: 0.85rem; }
+
+/* ---------- header ---------- */
+.top { position: fixed; inset: 0 0 auto; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: calc(env(safe-area-inset-top, 0px) + 14px) var(--gutter) 14px;
+  background: #000; border-bottom: 1px solid rgba(212, 174, 92, 0.22); box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5); }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.brand img { width: 26px; height: auto; }
+.brand span { font-family: var(--nav-font); font-size: 1.3rem; font-weight: 500; letter-spacing: 0.12em; color: var(--gold-hi); }
+.top nav { display: flex; align-items: center; gap: clamp(12px, 2.5vw, 28px); font-size: 0.9rem; }
+.top nav a:not(.btn) { text-decoration: none; color: var(--muted); letter-spacing: 0.08em; }
+.top nav a:not(.btn):hover { color: var(--gold-hi); }
+@media (max-width: 560px) { .top nav a:not(.btn) { display: none; } }
+
+/* ---------- hero ---------- */
+.hero { position: relative; isolation: isolate; overflow: hidden; min-height: 100svh; gap: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+  padding: 96px var(--gutter) 48px; }
+/* Background video: cover the hero, then darken the centre (behind the logo) and
+   fade the edges into the page so the gold orbit and text stay readable */
+.hero-video { position: absolute; inset: 0; z-index: -1; background: #0d0a06 url("../assets/video/boardroom-poster.jpg") center / cover no-repeat; }
+.hero-video video { width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; }
+.hero-video::after { content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 34% 42% at 50% 50%, rgba(7, 6, 5, 0.55), transparent 100%),
+    linear-gradient(180deg, rgba(7, 6, 5, 0.85) 0, rgba(7, 6, 5, 0.38) 18%, rgba(7, 6, 5, 0.38) 62%, var(--bg) 100%),
+    radial-gradient(ellipse 90% 80% at 50% 45%, transparent 40%, rgba(7, 6, 5, 0.7) 100%); }
+.wordmark { white-space: nowrap; font-family: var(--brand-font); font-weight: 500; font-size: clamp(1.1rem, 7cqw, 3rem); line-height: 1.05; letter-spacing: 0.12em; padding-left: 0.12em;
+  background: linear-gradient(180deg, var(--gold-hi) 10%, var(--gold) 55%, var(--gold-lo)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.wordmark span { letter-spacing: 0.04em; }
+.rule { position: relative; width: min(520px, 80vw); height: 2px; margin: 22px auto 16px; background: linear-gradient(90deg, transparent, var(--line), transparent); }
+.rule span { position: absolute; left: 0; top: -1.5px; width: 34%; height: 5px; border-radius: 3px;
+  background: linear-gradient(90deg, var(--gold-lo), var(--gold-hi)); box-shadow: 0 0 14px rgba(243, 217, 149, 0.6); }
+.tagline { text-shadow: 0 2px 12px #000; font-size: clamp(1rem, 2.4vw, 1.3rem); letter-spacing: 0.08em; color: var(--gold); }
+.scroll-cue { margin-top: 26px; font-size: 0.85rem; letter-spacing: 0.12em; color: var(--muted); text-decoration: none; }
+.scroll-cue .arrow { display: inline-block; margin-left: 4px; animation: nudge 2s ease-in-out infinite; }
+@keyframes nudge { 50% { transform: translateY(4px); } }
+
+/* ---------- pillars ---------- */
+.pillars { max-width: 1120px; margin: 0 auto; padding: 72px var(--gutter) 40px; text-align: center; }
+.pillars h2, .contact h2 { margin-top: 14px; font-weight: 400; font-size: clamp(1.8rem, 4.2vw, 2.8rem); line-height: 1.15; text-wrap: balance; }
+
+/* Orbit: discs are placed on a circle of radius 40% by main.js (--x/--y) and rotate slowly */
+.orbit { container-type: inline-size; position: relative; width: min(720px, 94vw, max(80svh, 460px)); aspect-ratio: 1; margin: 8px auto 4px; }
+.orbit-rings { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.orbit-rings circle { fill: none; stroke: rgba(212, 174, 92, 0.16); stroke-width: 0.15; }
+.orbit-rings .dash { stroke: rgba(212, 174, 92, 0.42); stroke-width: 0.22; stroke-dasharray: 0.6 1.4;
+  transform-origin: 50% 50%; animation: spin 120s linear infinite reverse; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .orbit-rings .dash { animation: none; } }
+
+.orbit-core { position: absolute; left: 50%; top: 50%; width: 52%; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4%; }
+.orbit-core .halo { position: absolute; inset: -6%; border-radius: 50%; z-index: -1;
+  background:
+    radial-gradient(circle at 50% 46%, rgba(243, 217, 149, 0.28), transparent 46%),
+    radial-gradient(circle, rgba(7, 6, 5, 0.82) 0, rgba(7, 6, 5, 0.6) 48%, transparent 71%);
+  animation: breathe 6s ease-in-out infinite; }
+@keyframes breathe { 50% { opacity: 0.8; transform: scale(0.97); } }
+@media (prefers-reduced-motion: reduce) { .orbit-core .halo { animation: none; } }
+.orbit-core img { width: 42%; height: auto; filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 1px rgba(243, 217, 149, 0.6)); }
+
+.tabs { --d: clamp(44px, 12.5cqw, 88px); position: absolute; inset: 0; }
+/* small orbit (phones, short screens): discs only; the selected pillar is named below the orbit */
+@container (max-width: 560px) {
+  .tab { width: auto; }
+  .tab .label, .tab .num { display: none; }
+  .orbit-core { width: 58%; }
+}
+.tab { position: absolute; left: 50%; top: 50%; width: 140px; display: flex; flex-direction: column; align-items: center; gap: 10px;
+  padding: 0; border: 0; background: none; color: var(--muted); cursor: pointer; font: 500 0.8rem/1.3 var(--sans); letter-spacing: 0.04em;
+  transform: translate(var(--x, 0px), var(--y, 0px)) translate(-50%, calc(var(--d) / -2)); will-change: transform; }
+.tab .disc { position: relative; display: grid; place-items: center; width: var(--d); height: var(--d); border-radius: 50%;
+  background: radial-gradient(circle at 50% 30%, #1d1710, #0b0907 70%);
+  box-shadow: inset 0 0 0 1px var(--line), 0 10px 24px rgba(0, 0, 0, 0.55);
+  transition: transform .3s cubic-bezier(.2, .8, .2, 1), box-shadow .3s, background .3s; }
+.tab .disc::after { content: ""; position: absolute; inset: -5px; border-radius: 50%; border: 1px solid transparent; transition: border-color .3s; }
+.tab .num { position: absolute; top: 11%; font-size: 0.6rem; letter-spacing: 0.14em; color: var(--gold-lo); }
+.tab svg { width: 42%; height: 42%; fill: none; stroke: var(--gold); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; transition: stroke .3s; }
+.tab .mark { width: 46%; height: auto; margin-top: 6%; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.25)); }
+/* brand marks (e.g. Finabler-S) sit on a pale disc so their own colours read */
+.tab .disc.has-logo { background: radial-gradient(circle at 50% 28%, #f8eed4, #e2c98f 60%, #b8924a); box-shadow: inset 0 0 0 1px rgba(243, 217, 149, 0.8), 0 10px 24px rgba(0, 0, 0, 0.55); }
+.tab .disc.has-logo .num { color: #8a6528; }
+.tab .label { text-shadow: 0 1px 3px #000, 0 2px 12px #000; }
+.tab:hover .disc { transform: scale(1.08); box-shadow: inset 0 0 0 1px var(--gold), 0 14px 30px rgba(0, 0, 0, 0.6); }
+.tab:hover { color: var(--text); }
+.tab[aria-selected="true"] { color: var(--gold-hi); }
+.tab[aria-selected="true"] .disc { transform: scale(1.12);
+  background: radial-gradient(circle at 50% 28%, var(--gold-hi), var(--gold) 45%, #8e6a2c);
+  box-shadow: 0 0 0 1px var(--gold-hi), 0 0 34px rgba(243, 217, 149, 0.4), 0 14px 30px rgba(0, 0, 0, 0.6); }
+.tab[aria-selected="true"] .disc::after { border-color: rgba(243, 217, 149, 0.45); }
+.tab[aria-selected="true"] svg { stroke: #1a1206; }
+.tab[aria-selected="true"] .num { color: #4a3510; }
+
+
+/* ---------- detail panel ---------- */
+.panel { text-align: left; padding: clamp(22px, 4vw, 40px); border-radius: 22px;
+  background: linear-gradient(180deg, rgba(29, 23, 16, 0.78), rgba(12, 10, 8, 0.86));
+  box-shadow: inset 0 0 0 1px var(--line), 0 30px 60px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.panel.swap > * { animation: rise .45s cubic-bezier(.2, .8, .2, 1) both; }
+.panel.swap > *:nth-child(2) { animation-delay: .05s; }
+.panel.swap > *:nth-child(n+3) { animation-delay: .1s; }
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } }
+@media (prefers-reduced-motion: reduce) { .panel.swap > * { animation: none; } }
+.panel-num { font-size: 0.74rem; letter-spacing: 0.3em; color: var(--gold); }
+.panel h3 { margin-top: 8px; font-weight: 400; font-size: clamp(1.45rem, 3vw, 2rem); line-height: 1.2; color: var(--gold-hi); }
+.panel-line { margin-top: 6px; color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.chips li { display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; font-size: 0.9rem;
+  background: rgba(212, 174, 92, 0.08); box-shadow: inset 0 0 0 1px var(--line); }
+.chips li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--gold-hi); box-shadow: 0 0 8px var(--gold); }
+.panel-label { margin-top: 28px; font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); }
+.services { margin-top: 12px; columns: 2 320px; column-gap: 40px; }
+.services li { break-inside: avoid; position: relative; padding: 9px 0 9px 22px; border-bottom: 1px solid rgba(212, 174, 92, 0.12); font-size: 0.95rem; color: rgba(239, 231, 214, 0.86); }
+.services li::before { content: ""; position: absolute; left: 2px; top: 1.05em; width: 9px; height: 1px; background: var(--gold); }
+.panel-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+
+/* ---------- contact ---------- */
+.contact { max-width: 1120px; margin: 40px auto 0; padding: 64px var(--gutter) calc(env(safe-area-inset-bottom, 0px) + 32px); text-align: center; border-top: 1px solid rgba(212, 174, 92, 0.14); }
+.contact dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin: 36px 0 0; }
+.contact dt { font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); }
+.contact dd { margin: 6px 0 0; color: var(--muted); }
+.contact dd a { text-decoration: none; color: var(--text); }
+.contact dd a:hover { color: var(--gold-hi); }
+.fine { margin-top: 44px; font-size: 0.8rem; color: rgba(239, 231, 214, 0.4); }
