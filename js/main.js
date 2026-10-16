@@ -123,6 +123,17 @@
   });
   select(0, { turn: false });
 
+  /* ---------- brand list (phones) ---------- */
+  $('brand-list').innerHTML = PILLARS.map((p) => {
+    const inner = `
+      <span class="bl-logo"><img src="${p.logo}" alt="" width="256" height="256"${p.logoShadow ? ` data-shadow="${p.logoShadow}"` : ''}></span>
+      <span class="bl-text"><b>${p.short}</b><small>${p.about}</small></span>
+      <span class="bl-go" aria-hidden="true">${p.site ? '↗' : ''}</span>`;
+    return p.site
+      ? `<li><a href="${p.site}">${inner}</a></li>`
+      : `<li><div>${inner}</div></li>`;
+  }).join('');
+
   /* ---------- hero video ---------- */
   // Reduced motion: hold on the handshake frame. Otherwise play only while the hero is on screen.
   const video = $('hero-video');

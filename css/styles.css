@@ -1,24 +1,23 @@
 /* Enabler-S landing page
    Black marble and brushed gold, taken from the logo. One column, centred:
    hero (logo at the centre, eight brand discs orbiting it) → contact. */
-/* Ginelo (Elegant Luxury Serif) for the Enabler-S name at the centre of the orbit. It is a licensed font, so it is not bundled:
-   drop Ginelo.woff2 / .otf / .ttf into webpage1/fonts/ (or have it installed) and it is picked up.
-   Until then the name falls back to Cormorant Garamond. */
+/* Ginelo (Elegant Luxury Serif) for the Enabler-S name at the centre of the orbit. It is a licensed font, so it is not bundled
+   (see the src note below). Until then the name falls back to Cormorant Garamond. */
 @font-face {
   font-family: "Ginelo";
-  src: local("Ginelo"), local("Ginelo Regular"), local("Ginelo-Regular"),
-       url("../fonts/Ginelo.woff2") format("woff2"), url("../fonts/Ginelo.woff") format("woff"),
-       url("../fonts/Ginelo.otf") format("opentype"), url("../fonts/Ginelo.ttf") format("truetype");
+  /* To bundle the font: add fonts/Ginelo.woff2 and append  , url("../fonts/Ginelo.woff2") format("woff2")  below.
+     (Left out until the file exists, so visitors' browsers don't request a missing file.) */
+  src: local("Ginelo"), local("Ginelo Regular"), local("Ginelo-Regular");
   font-display: swap;
 }
 
-/* Luxento (Luxury Serif) for the Enabler-S name in the main navigation. Also licensed: drop
-   Luxento.woff2 / .otf / .ttf into webpage1/fonts/ (or have it installed). Falls back to Cormorant Garamond. */
+/* Luxento (Luxury Serif) for the Enabler-S name in the main navigation. Also licensed and not bundled
+   (see the src note below). Falls back to Cormorant Garamond. */
 @font-face {
   font-family: "Luxento";
-  src: local("Luxento"), local("Luxento Regular"), local("Luxento-Regular"),
-       url("../fonts/Luxento.woff2") format("woff2"), url("../fonts/Luxento.woff") format("woff"),
-       url("../fonts/Luxento.otf") format("opentype"), url("../fonts/Luxento.ttf") format("truetype");
+  /* To bundle the font: add fonts/Luxento.woff2 and append  , url("../fonts/Luxento.woff2") format("woff2")  below.
+     (Left out until the file exists, so visitors' browsers don't request a missing file.) */
+  src: local("Luxento"), local("Luxento Regular"), local("Luxento-Regular");
   font-display: swap;
 }
 
@@ -104,6 +103,24 @@ em { font: italic 500 1.08em var(--serif); color: var(--gold-hi); }
   background: linear-gradient(90deg, var(--gold-lo), var(--gold-hi)); box-shadow: 0 0 14px rgba(243, 217, 149, 0.6); }
 .tagline { text-shadow: 0 2px 12px #000; font-size: clamp(1rem, 2.4vw, 1.3rem); letter-spacing: 0.08em; color: var(--gold); }
 .cue-title { margin-top: 18px; min-height: 1.6em; font-size: 0.95rem; letter-spacing: 0.06em; color: var(--text); text-shadow: 0 2px 12px #000; }
+/* brand list: phones only */
+.brand-list { display: none; }
+@media (max-width: 700px) {
+  .cue-title { display: none; }
+  .brand-list { display: grid; gap: 10px; width: 100%; max-width: 460px; margin: 26px auto 0; text-align: left; }
+  .brand-list li > a, .brand-list li > div { display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: 14px;
+    text-decoration: none; background: rgba(12, 10, 8, 0.72); box-shadow: inset 0 0 0 1px var(--line); }
+  .brand-list li > a:active { background: rgba(212, 174, 92, 0.16); }
+  .bl-logo { flex: none; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%;
+    background: radial-gradient(circle at 50% 28%, #f8eed4, #e2c98f 60%, #b8924a); box-shadow: inset 0 0 0 1px rgba(243, 217, 149, 0.8); }
+  .bl-logo img { width: 66%; height: auto; }
+  .bl-logo img[data-shadow] { filter: drop-shadow(0 0 0.6px rgba(40, 24, 6, 0.95)) drop-shadow(0 0 0.6px rgba(40, 24, 6, 0.95)); }
+  .bl-text { display: flex; flex-direction: column; min-width: 0; }
+  .bl-text b { font-weight: 500; color: var(--gold-hi); letter-spacing: 0.04em; }
+  .bl-text small { font-size: 0.8rem; color: var(--muted); }
+  .bl-go { margin-left: auto; color: var(--gold); font-size: 1.1rem; }
+  .scroll-cue { margin-top: 22px; }
+}
 .scroll-cue { margin-top: 14px; font-size: 0.85rem; letter-spacing: 0.12em; color: var(--muted); text-decoration: none; }
 .scroll-cue .arrow { display: inline-block; margin-left: 4px; animation: nudge 2s ease-in-out infinite; }
 @keyframes nudge { 50% { transform: translateY(4px); } }
@@ -131,8 +148,9 @@ em { font: italic 500 1.08em var(--serif); color: var(--gold-hi); }
 .tabs { --d: clamp(44px, 12.5cqw, 88px); position: absolute; inset: 0; }
 /* small orbit (phones, short screens): discs only; the selected pillar is named below the orbit */
 @container (max-width: 560px) {
-  .tab { width: auto; }
-  .tab .label, .tab .num, .tab .about, .tab .tip { display: none; }
+  .tab { width: auto; gap: 5px; }
+  .tab .num, .tab .about, .tab .tip { display: none; }
+  .tab .label { font-size: 0.6rem; letter-spacing: 0.02em; white-space: nowrap; }   /* small orbit: names only */
   .orbit-core { width: 58%; }
 }
 .tab { position: absolute; left: 50%; top: 50%; width: 140px; display: flex; flex-direction: column; align-items: center; gap: 10px;

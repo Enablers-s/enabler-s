@@ -23,8 +23,12 @@ Locally, clone the repos side by side in one folder (this one as `webpage1/`). W
 - Brand logos (transparent): `assets/`; hero video: `assets/video/`
 
 ## Fonts
-Ginelo (centre name) and Luxento (navigation name) are licensed fonts and are not included.
-Add `Ginelo.woff2|otf|ttf` and `Luxento.woff2|otf|ttf` to `fonts/` to enable them; until then the name falls back to Cormorant Garamond.
+Body and display fonts are self-hosted in `fonts/`. Ginelo (centre name) and Luxento (navigation name) are licensed fonts and are not included; the name falls back to Cormorant Garamond. To bundle one, add e.g. `fonts/Ginelo.woff2` and add its `url(...)` to the `src` of the matching `@font-face` in `css/styles.css` (instructions are in the comment there).
+
+## Deploying on Vercel
+Each repo is a static site with no build step (Framework preset: **Other**, no build command, output directory = repo root). `vercel.json` sets the security headers (CSP, clickjacking and MIME-sniffing protection, referrer and permissions policies) and long caching for fonts and media; `.vercelignore` keeps source files and notes out of the published site.
+
+After deploying the brand sites, replace the local `../brand/index.html` paths in `BRAND_SITES` (top of `js/data.js`) with their live URLs.
 
 ## Running locally
 No build step. Open `index.html` in a browser, or serve the folder (e.g. `python3 -m http.server`).
