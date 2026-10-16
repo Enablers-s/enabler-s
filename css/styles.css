@@ -1,6 +1,6 @@
 /* Enabler-S landing page
    Black marble and brushed gold, taken from the logo. One column, centred:
-   hero (logo at the centre of the pillar orbit) → eight pillar discs orbiting the logo → detail panel → contact. */
+   hero (logo at the centre, eight brand discs orbiting it) → contact. */
 /* Ginelo (Elegant Luxury Serif) for the Enabler-S name at the centre of the orbit. It is a licensed font, so it is not bundled:
    drop Ginelo.woff2 / .otf / .ttf into webpage1/fonts/ (or have it installed) and it is picked up.
    Until then the name falls back to Cormorant Garamond. */
@@ -88,8 +88,9 @@ em { font: italic 500 1.08em var(--serif); color: var(--gold-hi); }
   padding: 96px var(--gutter) 48px; }
 /* Background video: cover the hero, then darken the centre (behind the logo) and
    fade the edges into the page so the gold orbit and text stay readable */
-.hero-video { position: absolute; inset: 0; z-index: -1; background: #0d0a06 url("../assets/video/boardroom-poster.jpg") center / cover no-repeat; }
-.hero-video video { width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; }
+.hero-video { position: absolute; inset: 0; z-index: -1; overflow: hidden; background: #0d0a06 url("../assets/video/boardroom-poster.jpg") center / cover no-repeat; }
+.hero-video video { width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%;
+  filter: blur(7px); transform: scale(1.08); }   /* soft focus; the slight zoom hides the blurred edges */
 .hero-video::after { content: ""; position: absolute; inset: 0;
   background:
     radial-gradient(ellipse 34% 42% at 50% 50%, rgba(7, 6, 5, 0.55), transparent 100%),
@@ -102,13 +103,10 @@ em { font: italic 500 1.08em var(--serif); color: var(--gold-hi); }
 .rule span { position: absolute; left: 0; top: -1.5px; width: 34%; height: 5px; border-radius: 3px;
   background: linear-gradient(90deg, var(--gold-lo), var(--gold-hi)); box-shadow: 0 0 14px rgba(243, 217, 149, 0.6); }
 .tagline { text-shadow: 0 2px 12px #000; font-size: clamp(1rem, 2.4vw, 1.3rem); letter-spacing: 0.08em; color: var(--gold); }
-.scroll-cue { margin-top: 26px; font-size: 0.85rem; letter-spacing: 0.12em; color: var(--muted); text-decoration: none; }
+.cue-title { margin-top: 18px; min-height: 1.6em; font-size: 0.95rem; letter-spacing: 0.06em; color: var(--text); text-shadow: 0 2px 12px #000; }
+.scroll-cue { margin-top: 14px; font-size: 0.85rem; letter-spacing: 0.12em; color: var(--muted); text-decoration: none; }
 .scroll-cue .arrow { display: inline-block; margin-left: 4px; animation: nudge 2s ease-in-out infinite; }
 @keyframes nudge { 50% { transform: translateY(4px); } }
-
-/* ---------- pillars ---------- */
-.pillars { max-width: 1120px; margin: 0 auto; padding: 72px var(--gutter) 40px; text-align: center; }
-.pillars h2, .contact h2 { margin-top: 14px; font-weight: 400; font-size: clamp(1.8rem, 4.2vw, 2.8rem); line-height: 1.15; text-wrap: balance; }
 
 /* Orbit: discs are placed on a circle of radius 40% by main.js (--x/--y) and rotate slowly */
 .orbit { container-type: inline-size; position: relative; width: min(720px, 94vw, max(80svh, 460px)); aspect-ratio: 1; margin: 8px auto 4px; }
@@ -134,7 +132,7 @@ em { font: italic 500 1.08em var(--serif); color: var(--gold-hi); }
 /* small orbit (phones, short screens): discs only; the selected pillar is named below the orbit */
 @container (max-width: 560px) {
   .tab { width: auto; }
-  .tab .label, .tab .num { display: none; }
+  .tab .label, .tab .num, .tab .about, .tab .tip { display: none; }
   .orbit-core { width: 58%; }
 }
 .tab { position: absolute; left: 50%; top: 50%; width: 140px; display: flex; flex-direction: column; align-items: center; gap: 10px;
@@ -148,55 +146,37 @@ em { font: italic 500 1.08em var(--serif); color: var(--gold-hi); }
 .tab .num { position: absolute; top: 11%; font-size: 0.6rem; letter-spacing: 0.14em; color: var(--gold-lo); }
 .tab svg { width: 42%; height: 42%; fill: none; stroke: var(--gold); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; transition: stroke .3s; }
 .tab .mark { width: 46%; height: auto; margin-top: 6%; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.25)); }
-/* brand marks (e.g. Finabler-S) sit on a pale disc so their own colours read */
+/* brand marks sit on a pale gold disc so their own colours read */
 .tab .disc.has-logo { background: radial-gradient(circle at 50% 28%, #f8eed4, #e2c98f 60%, #b8924a); box-shadow: inset 0 0 0 1px rgba(243, 217, 149, 0.8), 0 10px 24px rgba(0, 0, 0, 0.55); }
 .tab .disc.has-logo .num { color: #8a6528; }
-/* pale metal logos (Spaceablers) need a firmer shadow to separate from the gold disc */
 /* white logos (Ugx) get a thin dark outline so small letters stay crisp on gold */
 .tab .mark[data-shadow="strong"] { margin-top: 6%; filter: drop-shadow(0 0 0.6px rgba(40, 24, 6, 0.95)) drop-shadow(0 0 0.6px rgba(40, 24, 6, 0.95)) drop-shadow(0 2px 4px rgba(60, 38, 10, 0.45)); }
-.tab .mark[data-shadow] { margin-top: 10%; filter: drop-shadow(0 1px 1px rgba(60, 38, 10, 0.55)) drop-shadow(0 3px 6px rgba(60, 38, 10, 0.3)); }
-/* light logos keep a dark ground with the same gold rim: slate (Ugx) or warm black (Spaceablers) */
-.tab .disc.has-logo.dark { background: radial-gradient(circle at 50% 28%, #34405a, #1c2330 62%, #10141c);
-  box-shadow: inset 0 0 0 1px rgba(243, 217, 149, 0.8), 0 10px 24px rgba(0, 0, 0, 0.55); }
-.tab .disc.has-logo.black { background: radial-gradient(circle at 50% 28%, #2e2720, #15110d 62%, #0a0806);
-  box-shadow: inset 0 0 0 1px rgba(243, 217, 149, 0.8), 0 10px 24px rgba(0, 0, 0, 0.55); }
-.tab .disc.has-logo.dark .num, .tab .disc.has-logo.black .num { color: var(--gold-soft); }
+/* pale metal logos (Spaceablers) need a firmer shadow to separate from the gold disc */
+.tab .mark[data-shadow="true"] { margin-top: 10%; filter: drop-shadow(0 1px 1px rgba(60, 38, 10, 0.55)) drop-shadow(0 3px 6px rgba(60, 38, 10, 0.3)); }
+/* a few words under each name, and the one-line summary on hover/focus */
+.tab .about { max-width: 132px; margin-top: -6px; font-size: 0.68rem; font-weight: 400; line-height: 1.3; letter-spacing: 0.02em;
+  color: rgba(239, 231, 214, 0.72); text-shadow: 0 1px 3px #000, 0 2px 10px #000; }
+.tab .tip { position: absolute; bottom: calc(100% + 10px); left: 50%; z-index: 5; width: max-content; max-width: 220px; padding: 10px 14px;
+  border-radius: 12px; font-size: 0.8rem; font-weight: 500; line-height: 1.4; letter-spacing: 0.01em; color: var(--text); text-align: center;
+  background: rgba(12, 10, 8, 0.94); box-shadow: inset 0 0 0 1px var(--line), 0 12px 30px rgba(0, 0, 0, 0.5);
+  opacity: 0; transform: translate(-50%, 6px); pointer-events: none; transition: opacity .2s, transform .2s; }
+.tab:hover .tip, .tab:focus-visible .tip { opacity: 1; transform: translate(-50%, 0); }
+.tab:hover, .tab:focus-visible { z-index: 10; }   /* hovered disc (and its summary) above its neighbours */
 .tab .label { text-shadow: 0 1px 3px #000, 0 2px 12px #000; }
 .tab:hover .disc { transform: scale(1.08); box-shadow: inset 0 0 0 1px var(--gold), 0 14px 30px rgba(0, 0, 0, 0.6); }
 .tab:hover { color: var(--text); }
-.tab[aria-selected="true"] { color: var(--gold-hi); }
-.tab[aria-selected="true"] .disc { transform: scale(1.12);
+.tab[aria-pressed="true"] { color: var(--gold-hi); }
+.tab[aria-pressed="true"] .disc { transform: scale(1.12);
   background: radial-gradient(circle at 50% 28%, var(--gold-hi), var(--gold) 45%, #8e6a2c);
   box-shadow: 0 0 0 1px var(--gold-hi), 0 0 34px rgba(243, 217, 149, 0.4), 0 14px 30px rgba(0, 0, 0, 0.6); }
-.tab[aria-selected="true"] .disc::after { border-color: rgba(243, 217, 149, 0.45); }
-.tab[aria-selected="true"] svg { stroke: #1a1206; }
-.tab[aria-selected="true"] .num { color: #4a3510; }
+.tab[aria-pressed="true"] .disc::after { border-color: rgba(243, 217, 149, 0.45); }
+.tab[aria-pressed="true"] svg { stroke: #1a1206; }
+.tab[aria-pressed="true"] .num { color: #4a3510; }
+.tab[aria-pressed="true"] .num { color: #4a3510; }
 
-
-/* ---------- detail panel ---------- */
-.panel { text-align: left; padding: clamp(22px, 4vw, 40px); border-radius: 22px;
-  background: linear-gradient(180deg, rgba(29, 23, 16, 0.78), rgba(12, 10, 8, 0.86));
-  box-shadow: inset 0 0 0 1px var(--line), 0 30px 60px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
-.panel.swap > * { animation: rise .45s cubic-bezier(.2, .8, .2, 1) both; }
-.panel.swap > *:nth-child(2) { animation-delay: .05s; }
-.panel.swap > *:nth-child(n+3) { animation-delay: .1s; }
-@keyframes rise { from { opacity: 0; transform: translateY(10px); } }
-@media (prefers-reduced-motion: reduce) { .panel.swap > * { animation: none; } }
-.panel-num { font-size: 0.74rem; letter-spacing: 0.3em; color: var(--gold); }
-.panel h3 { margin-top: 8px; font-weight: 400; font-size: clamp(1.45rem, 3vw, 2rem); line-height: 1.2; color: var(--gold-hi); }
-.panel-line { margin-top: 6px; color: var(--muted); }
-.chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
-.chips li { display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; font-size: 0.9rem;
-  background: rgba(212, 174, 92, 0.08); box-shadow: inset 0 0 0 1px var(--line); }
-.chips li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--gold-hi); box-shadow: 0 0 8px var(--gold); }
-.panel-label { margin-top: 28px; font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); }
-.services { margin-top: 12px; columns: 2 320px; column-gap: 40px; }
-.services li { break-inside: avoid; position: relative; padding: 9px 0 9px 22px; border-bottom: 1px solid rgba(212, 174, 92, 0.12); font-size: 0.95rem; color: rgba(239, 231, 214, 0.86); }
-.services li::before { content: ""; position: absolute; left: 2px; top: 1.05em; width: 9px; height: 1px; background: var(--gold); }
-.panel-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
 
 /* ---------- contact ---------- */
+.contact h2 { margin-top: 14px; font-weight: 400; font-size: clamp(1.8rem, 4.2vw, 2.8rem); line-height: 1.15; text-wrap: balance; }
 .contact { max-width: 1120px; margin: 40px auto 0; padding: 64px var(--gutter) calc(env(safe-area-inset-bottom, 0px) + 32px); text-align: center; border-top: 1px solid rgba(212, 174, 92, 0.14); }
 .contact dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin: 36px 0 0; }
 .contact dt { font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); }

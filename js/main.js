@@ -1,4 +1,4 @@
-// Enabler-S landing page: the eight pillar tabs orbiting the logo, and their detail panel.
+// Enabler-S landing page: the eight brand discs orbiting the logo.
 // Plain script (no modules) so index.html also works when opened straight from disk.
 (() => {
   'use strict';
@@ -12,7 +12,7 @@
      Pillar orbit
      Eight discs ride a circle (radius 40% of the orbit box) around the
      Enabler-S logo and turn slowly. Hovering or focusing the orbit pauses it;
-     choosing a pillar glides that disc to the top and fills the panel below.
+     choosing a pillar glides that disc to the top and names it under the orbit.
      ===================================================================== */
   const ICONS = {
     licensing: '<path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/><path d="M9 10h7M9 13.5h5"/><circle cx="12.5" cy="18" r="1.6"/>',
@@ -34,14 +34,15 @@
 
   const orbit = $('orbit');
   const tabsEl = $('tabs');
-  const panel = $('panel');
 
   tabsEl.innerHTML = PILLARS.map((p, i) => `
-    <button class="tab" role="tab" id="tab-${p.id}" aria-controls="panel" aria-selected="false" tabindex="-1" type="button">
+    <button class="tab" id="tab-${p.id}" aria-pressed="false" tabindex="-1" type="button" aria-describedby="tip-${p.id}">
       <span class="disc${p.logo ? ' has-logo' : ''}${p.logoBg ? ' ' + p.logoBg : ''}"><span class="num">${pad(i + 1)}</span>${p.logo
         ? `<img class="mark" src="${p.logo}" alt="${p.brand || ''}" width="256" height="256"${p.logoSize ? ` style="width:${p.logoSize}%"` : ''}${p.logoShadow ? ` data-shadow="${p.logoShadow}"` : ''}>`
         : `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[p.icon]}</svg>`}</span>
       <span class="label">${p.short}</span>
+      <span class="about">${p.about}</span>
+      <span class="tip" id="tip-${p.id}" role="tooltip">${p.line}</span>
     </button>`).join('');
   const tabs = [...tabsEl.querySelectorAll('.tab')];
 
@@ -102,32 +103,14 @@
     current = i;
     const p = PILLARS[i];
     tabs.forEach((t, j) => {
-      t.setAttribute('aria-selected', String(j === i));
+      t.setAttribute('aria-pressed', String(j === i));
       t.tabIndex = j === i ? 0 : -1;
     });
     if (focus) tabs[i].focus({ preventScroll: true });
-    panel.setAttribute('aria-labelledby', tabs[i].id);
-
     $('cue-title').textContent = p.title;
-    $('p-num').textContent = `${pad(i + 1)} / ${pad(N)}`;
-    $('p-title').textContent = p.title;
-    $('p-line').textContent = p.line;
-    $('p-highlights').innerHTML = p.highlights.map((h) => `<li>${h}</li>`).join('');
-    $('p-services').innerHTML = p.services.map((s) => `<li>${s}</li>`).join('');
-    $('p-book').href = `mailto:${CONTACT.email}?subject=${encodeURIComponent('Consultation: ' + p.title)}`;
-    $('p-site').hidden = !p.site;
-    if (p.site) {
-      $('p-site').href = p.site;
-      $('p-site').firstChild.textContent = `Visit the ${p.brand} website `;
-    }
-    $('p-next').firstChild.textContent = `Next: ${PILLARS[(i + 1) % N].short} `;
-
-    panel.classList.remove('swap');
-    void panel.offsetWidth; // restart the entry animation
-    panel.classList.add('swap');
   }
 
-  // Clicking a pillar with its own website (e.g. Finablers) opens that site; others show their panel
+  // Clicking a pillar with its own website (e.g. Finablers) opens that site; others are just selected
   tabs.forEach((t, i) => t.addEventListener('click', () => {
     if (PILLARS[i].site) window.location.href = PILLARS[i].site;
     else select(i);
@@ -138,7 +121,6 @@
     else if (e.key === 'Home') { e.preventDefault(); select(0, { focus: true }); }
     else if (e.key === 'End') { e.preventDefault(); select(N - 1, { focus: true }); }
   });
-  $('p-next').addEventListener('click', () => select(current + 1, { focus: true }));
   select(0, { turn: false });
 
   /* ---------- hero video ---------- */
