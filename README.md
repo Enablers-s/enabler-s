@@ -2,13 +2,23 @@
 
 Static website for **Enabler-S FZE LLC**, "Enabling Nations and Enterprises to Grow".
 
-## Pages
-- `index.html`: Enabler-S home. The logo sits at the centre of a slowly rotating orbit of the eight service pillars, over a gold-graded boardroom video. Choosing a pillar shows its services below.
-- `finablers/`: Finablers, the corporate finance arm (opens from the Finablers disc).
-- `trustablers/`: Trustablers, the corporate legal arm (opens from the Trustablers disc).
+## Pages and sister sites
+`index.html` is the Enabler-S home: the logo at the centre of a rotating orbit of the eight brand discs, over a gold-graded boardroom video.
+
+Each brand is its **own website in its own repo**, linked from its disc:
+
+| Disc | Site | Repo |
+|---|---|---|
+| Bizablers | `../bizablers/` | Enablers-s/bizablers |
+| Finablers | `../finablers/` | Enablers-s/finablers |
+| Trustablers | `../trustablers/` | Enablers-s/trustablers |
+| Brandora | `../brandora/` | Enablers-s/brandora |
+| Movera | https://moveraglobal.com/ | (external) |
+
+Locally, clone the repos side by side in one folder (this one as `webpage1/`). When a brand gets its own domain, change its line in `BRAND_SITES` at the top of `js/data.js`.
 
 ## Editing
-- Pillar names, services, logos and links: `js/data.js`
+- Pillar names, services, logos and brand site addresses: `js/data.js`
 - Styles: `css/styles.css`; behaviour: `js/main.js`
 - Brand logos (transparent): `assets/`; hero video: `assets/video/`
 
