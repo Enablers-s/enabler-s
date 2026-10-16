@@ -1,7 +1,7 @@
 // The eight Enabler-S service pillars, from the company profile.
 // `short` is the label under each circular tab and `about` the few words beneath it; `icon` picks a glyph from ICONS in main.js,
 // or `logo` shows a brand mark image in the disc instead. `site` makes clicking the disc open that brand's website;
-// `logoSize` (% of the disc) enlarges wide logos; `logoBg: 'dark'` (slate) or 'black' (warm black)
+// `logoSize` (% of the disc) enlarges a logo and `logoNudge` (% of the disc) moves it down, clear of the disc number; `logoBg: 'dark'` (slate) or 'black' (warm black)
 // puts a light logo on a dark disc.
 
 // Each brand is its own website (its own repo and Vercel project). On the live site the discs link to
@@ -26,7 +26,7 @@ const BRAND_SITES = (location.protocol === 'file:' || ['localhost', '127.0.0.1']
 
 const PILLARS = [
   {
-    id: 'licensing', icon: 'licensing', logo: 'assets/bizablers-mark.png', logoSize: 56, site: BRAND_SITES.bizablers, short: 'Bizablers', about: 'Licensing & strategic advisory',
+    id: 'licensing', icon: 'licensing', logo: 'assets/bizablers-mark.png', logoSize: 68, logoNudge: 14, site: BRAND_SITES.bizablers, short: 'Bizablers', about: 'Licensing & strategic advisory',
     title: 'Global Licensing & Strategic Advisory', brand: 'Bizablers',
     line: 'Set up, structure and scale in any market.',
     highlights: ['Company formation & licensing', 'Mainland, free zone & international structuring', 'Business plans, feasibility studies & pitch decks', 'Joint ventures, M&A and multi-country expansion'],

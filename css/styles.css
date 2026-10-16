@@ -79,7 +79,6 @@ em { font: italic 500 1.08em var(--serif); color: var(--gold-hi); }
 .top nav { display: flex; align-items: center; gap: clamp(12px, 2.5vw, 28px); font-size: 0.9rem; }
 .top nav a:not(.btn) { text-decoration: none; color: var(--muted); letter-spacing: 0.08em; }
 .top nav a:not(.btn):hover { color: var(--gold-hi); }
-@media (max-width: 560px) { .top nav a:not(.btn) { display: none; } }
 
 /* ---------- hero ---------- */
 .hero { position: relative; isolation: isolate; overflow: hidden; min-height: 100svh; gap: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
