@@ -26,19 +26,14 @@
   <script src="js/main.js" defer></script>
 </head>
 <body>
-  <!-- Black marble: fractal noise thresholded into thin veins, tinted gold -->
-  <svg class="marble" aria-hidden="true" preserveAspectRatio="none">
-    <filter id="veins" x="0" y="0" width="100%" height="100%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.0022 0.006" numOctaves="6" seed="11"/>
-      <feColorMatrix type="matrix" values="1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 1"/>
-      <feComponentTransfer>
-        <feFuncR type="table" tableValues="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.9 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <feFuncG type="table" tableValues="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.62 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-        <feFuncB type="table" tableValues="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-      </feComponentTransfer>
-    </filter>
-    <rect width="100%" height="100%" filter="url(#veins)"/>
-  </svg>
+  <!-- Boardroom handshake loop, colour-graded to the brand gold (source: 358512_medium.mp4).
+       Fixed behind the whole page, so it carries on behind the contact section too. -->
+  <div class="hero-video" aria-hidden="true">
+    <video id="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/video/boardroom-poster.jpg">
+      <source src="assets/video/boardroom-720.mp4" type="video/mp4" media="(max-width: 900px)">
+      <source src="assets/video/boardroom-1080.mp4" type="video/mp4">
+    </video>
+  </div>
 
   <header class="top">
     <a class="brand" href="#hero" aria-label="Enabler-S home">
@@ -53,13 +48,6 @@
 
   <main>
     <section class="hero" id="hero">
-      <!-- Boardroom handshake loop, colour-graded to the brand gold (source: 358512_medium.mp4) -->
-      <div class="hero-video" aria-hidden="true">
-        <video id="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/video/boardroom-poster.jpg">
-          <source src="assets/video/boardroom-720.mp4" type="video/mp4" media="(max-width: 900px)">
-          <source src="assets/video/boardroom-1080.mp4" type="video/mp4">
-        </video>
-      </div>
       <p class="eyebrow">Advisory · Execution · Impact</p>
 
       <!-- Enabler-S sits at the centre; the eight pillar discs orbit it (positions set in main.js) -->

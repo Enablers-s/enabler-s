@@ -135,17 +135,18 @@
   }).join('');
 
   /* ---------- hero video ---------- */
-  // Reduced motion: hold on the handshake frame. Otherwise play only while the hero is on screen.
+  // Reduced motion: hold on the handshake frame. Otherwise loop behind the page while the tab is visible.
   const video = $('hero-video');
   if (reduceMotion) {
     video.removeAttribute('autoplay');
     video.pause();
     video.addEventListener('loadeddata', () => { video.currentTime = 3.6; }, { once: true });
   } else {
-    new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) video.play().catch(() => {});
-      else video.pause();
-    }).observe(video);
+    // The video sits behind the whole page; pause it only while the browser tab is hidden
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) video.pause();
+      else video.play().catch(() => {});
+    });
   }
 
   /* ---------- contact ---------- */
