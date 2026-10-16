@@ -4,15 +4,25 @@
 // `logoSize` (% of the disc) enlarges wide logos; `logoBg: 'dark'` (slate) or 'black' (warm black)
 // puts a light logo on a dark disc.
 
-// Each brand is its own website (its own repo). Locally the repos sit side by side in one folder;
-// when a brand goes live on its own domain, change its line here.
-const BRAND_SITES = {
+// Each brand is its own website (its own repo and Vercel project). On the live site the discs link to
+// the deployed brand sites; opened from disk or localhost they link to the side-by-side local folders.
+// To move a brand to its own domain, change its line in BRAND_SITES_LIVE.
+const BRAND_SITES_LIVE = {
+  bizablers: 'https://bizablers.vercel.app/',
+  finablers: 'https://finablers.vercel.app/',
+  trustablers: 'https://trustablers.vercel.app/',
+  brandora: 'https://brandora-s.vercel.app/',
+  movera: 'https://moveraglobal.com/',
+};
+const BRAND_SITES_LOCAL = {
   bizablers: '../bizablers/index.html',
   finablers: '../finablers/index.html',
   trustablers: '../trustablers/index.html',
   brandora: '../brandora/index.html',
   movera: 'https://moveraglobal.com/',
 };
+const BRAND_SITES = (location.protocol === 'file:' || ['localhost', '127.0.0.1'].includes(location.hostname))
+  ? BRAND_SITES_LOCAL : BRAND_SITES_LIVE;
 
 const PILLARS = [
   {

@@ -26,9 +26,25 @@ Locally, clone the repos side by side in one folder (this one as `webpage1/`). W
 Body and display fonts are self-hosted in `fonts/`. Ginelo (centre name) and Luxento (navigation name) are licensed fonts and are not included; the name falls back to Cormorant Garamond. To bundle one, add e.g. `fonts/Ginelo.woff2` and add its `url(...)` to the `src` of the matching `@font-face` in `css/styles.css` (instructions are in the comment there).
 
 ## Deploying on Vercel
-Each repo is a static site with no build step (Framework preset: **Other**, no build command, output directory = repo root). `vercel.json` sets the security headers (CSP, clickjacking and MIME-sniffing protection, referrer and permissions policies) and long caching for fonts and media; `.vercelignore` keeps source files and notes out of the published site.
+Import this repo in Vercel as a new project named **`enabler-s`**: Framework preset **Other**, no build command, no output directory (the repo root is the site). Nothing else to configure; there are no environment variables.
 
-After deploying the brand sites, replace the local `../brand/index.html` paths in `BRAND_SITES` (top of `js/data.js`) with their live URLs.
+The five sites link to each other at these addresses (set in js/data.js (BRAND_SITES_LIVE)). Opened from disk or localhost, the links use the side-by-side local folders instead.
+
+| Site | GitHub repo | Vercel project name | Live address |
+|---|---|---|---|
+| Enabler-S | Enablers-s/enabler-s | `enabler-s` | https://enabler-s.vercel.app |
+| Bizablers | Enablers-s/bizablers | `bizablers` | https://bizablers.vercel.app |
+| Finablers | Enablers-s/finablers | `finablers` | https://finablers.vercel.app |
+| Trustablers | Enablers-s/trustablers | `trustablers` | https://trustablers.vercel.app |
+| Brandora | Enablers-s/brandora | `brandora-s` (brandora.vercel.app is taken) | https://brandora-s.vercel.app |
+
+If a project ends up with a different address (for example a custom domain), update the addresses in js/data.js (BRAND_SITES_LIVE), the `canonical`/`og:` tags in index.html, robots.txt and sitemap.xml.
+
+Already set up for production:
+- `vercel.json`: security headers (Content-Security-Policy allowing only this site's own scripts, fonts and media; clickjacking protection; nosniff; referrer and permissions policies) and long caching for fonts and media
+- `.vercelignore`: keeps source files and notes out of the published site
+- `404.html`: branded "page not found" page
+- `robots.txt`, `sitemap.xml`, and share-preview tags (`og:` / Twitter) with `assets/og.jpg`
 
 ## Running locally
 No build step. Open `index.html` in a browser, or serve the folder (e.g. `python3 -m http.server`).
