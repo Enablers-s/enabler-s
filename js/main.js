@@ -149,6 +149,35 @@
     });
   }
 
+  /* ---------- open at the top ----------
+     The browser would otherwise restore the last scroll position on reload, or jump to #contact
+     if the address still has it, which looks like the page scrolling by itself. */
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+  window.scrollTo(0, 0);
+  // In-page links (Contact, Get in touch) scroll smoothly without adding #contact to the address
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a || a.getAttribute('href').length < 2) return;
+    const target = document.getElementById(a.getAttribute('href').slice(1));
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+  });
+
+  /* ---------- cookies & terms notice ---------- */
+  // The choice is stored in this browser only; storage can be unavailable (private mode), so every access is guarded.
+  const CONSENT_KEY = 'enabler-consent-v1';
+  const consent = $('consent');
+  const readConsent = () => { try { return localStorage.getItem(CONSENT_KEY); } catch { return null; } };
+  const saveConsent = (v) => { try { localStorage.setItem(CONSENT_KEY, v); } catch { /* not stored: notice shows again next visit */ } };
+  const showConsent = () => { consent.hidden = false; requestAnimationFrame(() => consent.classList.add('in')); };
+  const closeConsent = (v) => { saveConsent(v); consent.classList.remove('in'); consent.hidden = true; };
+  $('consent-accept').addEventListener('click', () => closeConsent('accepted'));
+  $('consent-decline').addEventListener('click', () => closeConsent('declined'));
+  $('cookie-settings').addEventListener('click', showConsent);
+  if (!readConsent()) showConsent();
+
   /* ---------- contact ---------- */
   $('c-email').textContent = CONTACT.email;
   $('c-email').href = `mailto:${CONTACT.email}`;
