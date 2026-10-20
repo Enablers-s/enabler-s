@@ -164,9 +164,9 @@ em { font: italic 500 1.08em var(--serif); color: var(--gold-hi); }
 /* brand marks sit on a pale gold disc so their own colours read */
 .tab .disc.has-logo { background: radial-gradient(circle at 50% 28%, #f8eed4, #e2c98f 60%, #b8924a); box-shadow: inset 0 0 0 1px rgba(243, 217, 149, 0.8), 0 10px 24px rgba(0, 0, 0, 0.55); }
 .tab .disc.has-logo .num { color: #8a6528; }
-/* white logos (Ugx) get a thin dark outline so small letters stay crisp on gold */
+/* white logos get a thin dark outline so small letters stay crisp on gold */
 .tab .mark[data-shadow="strong"] { margin-top: 6%; filter: drop-shadow(0 0 0.6px rgba(40, 24, 6, 0.95)) drop-shadow(0 0 0.6px rgba(40, 24, 6, 0.95)) drop-shadow(0 2px 4px rgba(60, 38, 10, 0.45)); }
-/* pale metal logos (Spaceablers) need a firmer shadow to separate from the gold disc */
+/* pale metal logos (Spaceablers, Techablers) need a firmer shadow to separate from the gold disc */
 .tab .mark[data-shadow="true"] { margin-top: 10%; filter: drop-shadow(0 1px 1px rgba(60, 38, 10, 0.55)) drop-shadow(0 3px 6px rgba(60, 38, 10, 0.3)); }
 /* a few words under each name, and the one-line summary on hover/focus */
 .tab .about { max-width: 132px; margin-top: -6px; font-size: 0.68rem; font-weight: 400; line-height: 1.3; letter-spacing: 0.02em;
