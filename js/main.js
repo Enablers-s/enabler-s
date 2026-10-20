@@ -38,7 +38,7 @@
   tabsEl.innerHTML = PILLARS.map((p, i) => `
     <button class="tab" id="tab-${p.id}" aria-pressed="false" tabindex="-1" type="button" aria-describedby="tip-${p.id}">
       <span class="disc${p.logo ? ' has-logo' : ''}${p.logoBg ? ' ' + p.logoBg : ''}"><span class="num">${pad(i + 1)}</span>${p.logo
-        ? `<img class="mark" src="${p.logo}" alt="${p.brand || ''}" width="256" height="256"${p.logoSize || p.logoNudge ? ` style="${p.logoSize ? `width:${p.logoSize}%;` : ''}${p.logoNudge ? `margin-top:${p.logoNudge}%;` : ''}"` : ''}${p.logoShadow ? ` data-shadow="${p.logoShadow}"` : ''}>`
+        ? `<img class="mark" src="${p.logo}" alt="" width="256" height="256"${p.logoSize || p.logoNudge ? ` style="${p.logoSize ? `width:${p.logoSize}%;` : ''}${p.logoNudge ? `margin-top:${p.logoNudge}%;` : ''}"` : ''}${p.logoShadow ? ` data-shadow="${p.logoShadow}"` : ''}>`
         : `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[p.icon]}</svg>`}</span>
       <span class="label">${p.short}</span>
       <span class="about">${p.about}</span>

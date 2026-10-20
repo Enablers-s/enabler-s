@@ -96,6 +96,8 @@ em { font: italic 500 1.08em var(--serif); color: var(--gold-hi); }
   background: linear-gradient(180deg, var(--gold-hi) 10%, var(--gold) 55%, var(--gold-lo)); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .wordmark span { letter-spacing: 0.04em; }
 .rule { position: relative; width: min(520px, 80vw); height: 2px; margin: 22px auto 16px; background: linear-gradient(90deg, transparent, var(--line), transparent); }
+/* large orbit: the bottom disc's two-line description hangs below the orbit box, so leave it room above the rule */
+@media (min-width: 701px) { .rule { margin-top: 48px; } }
 .rule span { position: absolute; left: 0; top: -1.5px; width: 34%; height: 5px; border-radius: 3px;
   background: linear-gradient(90deg, var(--gold-lo), var(--gold-hi)); box-shadow: 0 0 14px rgba(243, 217, 149, 0.6); }
 .tagline { text-shadow: 0 2px 12px #000; font-size: clamp(1rem, 2.4vw, 1.3rem); letter-spacing: 0.08em; color: var(--gold); }
@@ -103,6 +105,8 @@ em { font: italic 500 1.08em var(--serif); color: var(--gold-hi); }
 /* brand list: phones only */
 .brand-list { display: none; }
 @media (max-width: 700px) {
+  /* main.js fills the brand list after load; top-aligning keeps the orbit from jumping up when it arrives */
+  .hero { justify-content: flex-start; }
   .cue-title { display: none; }
   .brand-list { display: grid; gap: 10px; width: 100%; max-width: 460px; margin: 26px auto 0; text-align: left; }
   .brand-list li > a, .brand-list li > div { display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: 14px;
