@@ -152,9 +152,12 @@
   /* ---------- open at the top ----------
      The browser would otherwise restore the last scroll position on reload, or jump to #contact
      if the address still has it, which looks like the page scrolling by itself. */
+  // Arriving from another page with #contact (the Global / Case Studies "Contact" link) still lands on the contact section.
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  const arrival = location.hash && document.getElementById(location.hash.slice(1));
   if (location.hash) history.replaceState(null, '', location.pathname + location.search);
-  window.scrollTo(0, 0);
+  if (arrival) arrival.scrollIntoView();
+  else window.scrollTo(0, 0);
   // In-page links (Contact, Get in touch) scroll smoothly without adding #contact to the address
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a[href^="#"]');

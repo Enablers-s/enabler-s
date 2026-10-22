@@ -1,6 +1,6 @@
 /* Enabler-S landing page
    Brushed gold over a blurred, gold-graded boardroom video that runs behind the whole page. One column, centred:
-   hero (logo at the centre, eight brand discs orbiting it) → contact. */
+   hero (logo at the centre, eight brand discs orbiting it) → global → case studies → contact. */
 /* Ginelo (Elegant Luxury Serif) for the Enabler-S name at the centre of the orbit. It is a licensed font, so it is not bundled
    (see the src note below). Until then the name falls back to Cormorant Garamond. */
 @font-face {
@@ -78,6 +78,16 @@ em { font: italic 500 1.08em var(--serif); color: var(--gold-hi); }
 .top nav { display: flex; align-items: center; gap: clamp(12px, 2.5vw, 28px); font-size: 0.9rem; }
 .top nav a:not(.btn) { text-decoration: none; color: var(--muted); letter-spacing: 0.08em; }
 .top nav a:not(.btn):hover { color: var(--gold-hi); }
+.brand span, .top nav a { white-space: nowrap; }
+@media (max-width: 480px) { .top nav { gap: 12px; font-size: 0.78rem; } .top nav a:not(.btn) { letter-spacing: 0.02em; } }
+/* narrow phones: three nav links plus the name must fit on one line */
+@media (max-width: 400px) {
+  .top { gap: 10px; }
+  .brand { gap: 7px; }
+  .brand img { width: 22px; }
+  .brand span { font-size: 1.05rem; letter-spacing: 0.05em; }
+  .top nav { gap: 10px; font-size: 0.74rem; }
+}
 
 /* ---------- hero ---------- */
 .hero { position: relative; isolation: isolate; overflow: hidden; min-height: 100svh; gap: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
@@ -193,6 +203,121 @@ em { font: italic 500 1.08em var(--serif); color: var(--gold-hi); }
 .tab[aria-pressed="true"] .num { color: #4a3510; }
 .tab[aria-pressed="true"] .num { color: #4a3510; }
 
+
+/* ---------- global & case studies pages ---------- */
+.subpage main { padding-top: 40px; }
+/* background video on the case studies page: darker than the home page so long text stays readable */
+.page-video::after { background:
+  linear-gradient(180deg, rgba(7, 6, 5, 0.9) 0, rgba(7, 6, 5, 0.66) 22%, rgba(7, 6, 5, 0.66) 70%, rgba(7, 6, 5, 0.9) 100%); }
+@media (prefers-reduced-motion: reduce) { .page-video video { display: none; } }
+/* Global page: the globe is already dark, so a lighter blur and veil keep the gold city lights visible */
+.globe-video { background-image: url("../assets/video/globe-poster.jpg"); background-color: #000; }
+.globe-video video { filter: blur(1.5px) saturate(1.1); transform: scale(1.02); object-position: 50% 50%; }
+.globe-video::after { background:
+  linear-gradient(180deg, rgba(7, 6, 5, 0.75) 0, rgba(7, 6, 5, 0.35) 25%, rgba(7, 6, 5, 0.5) 60%, rgba(7, 6, 5, 0.85) 100%); }
+.page-video ~ main .region-list > li, .page-video ~ main .services > li { background: rgba(12, 10, 8, 0.82); backdrop-filter: blur(6px); }   /* poster still shows */
+.page-video ~ main .block h1, .page-video ~ main .block h2, .page-video ~ main .lead { text-shadow: 0 2px 14px #000; }
+.page-video ~ main .case, .page-video ~ main .process > li { background: rgba(12, 10, 8, 0.86); backdrop-filter: blur(6px); }
+.top nav a[aria-current="page"] { color: var(--gold-hi); }
+.block { max-width: 1120px; margin: 0 auto; padding: 96px var(--gutter) 0; text-align: center; }
+.block.page-head { padding-top: 72px; }
+.block h1, .block h2 { margin-top: 14px; font-weight: 400; font-size: clamp(1.8rem, 4.2vw, 2.8rem); line-height: 1.15; text-wrap: balance; }
+.block h1 { font-size: clamp(2.2rem, 5.6vw, 3.8rem); line-height: 1.08; }
+.block .lead { max-width: 660px; margin: 18px auto 0; color: var(--muted); text-wrap: pretty; }
+.block h3 { margin: 0; font-weight: 500; letter-spacing: 0.03em; color: var(--gold-hi); }
+.block .note { max-width: 680px; margin: 28px auto 0; font-size: 0.78rem; color: rgba(239, 231, 214, 0.45); }
+.block .tag { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); }
+.block .by { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-lo); }
+/* shared card surface */
+.region-list > li, .hubs > li, .services > li, .case, .process > li { border-radius: 16px; background: rgba(12, 10, 8, 0.78); box-shadow: inset 0 0 0 1px var(--line); text-align: left; }
+
+/* stat strip: one panel split into cells by 1px gold hairlines */
+.stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; max-width: 880px; margin: 44px auto 0; overflow: hidden;
+  border-radius: 16px; background: var(--line); box-shadow: inset 0 0 0 1px var(--line); }
+@media (min-width: 700px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+.stats > div { display: flex; flex-direction: column-reverse; gap: 6px; padding: 22px 12px; background: #0c0a08; }
+.stats dt { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+.stats dd { margin: 0; font: 500 2.4rem/1 var(--serif); color: var(--gold-hi); }
+
+/* regions: one wide row each, countries as chips */
+.region-list { display: grid; gap: 12px; margin-top: 40px; }
+.region-list > li { display: grid; gap: 14px; padding: 22px 24px; }
+@media (min-width: 760px) { .region-list > li { grid-template-columns: 330px 1fr; align-items: center; gap: 24px; } }
+.rl-head span { display: block; margin-top: 4px; font-size: 0.8rem; letter-spacing: 0.06em; color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips li { padding: 6px 13px; border-radius: 999px; font-size: 0.84rem; color: var(--text);
+  background: rgba(212, 174, 92, 0.07); box-shadow: inset 0 0 0 1px rgba(212, 174, 92, 0.22); }
+
+/* key hubs: cards with labelled facts */
+.hubs { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 14px; margin-top: 40px; }
+.hubs > li { display: flex; flex-direction: column; gap: 8px; padding: 24px; }
+.hubs h3 { font: 500 1.5rem/1.2 var(--serif); }
+.hubs p:not(.tag) { font-size: 0.92rem; line-height: 1.55; color: var(--muted); }
+.facts { display: grid; gap: 8px; margin: auto 0 0; padding-top: 14px; border-top: 1px solid rgba(212, 174, 92, 0.16); }
+.facts div { display: flex; justify-content: space-between; gap: 16px; font-size: 0.86rem; }
+.facts dt { color: var(--muted); }
+.facts dd { margin: 0; text-align: right; color: var(--text); }
+
+/* services: what we handle in every market */
+.services { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; margin-top: 40px; }
+.services > li { display: flex; flex-direction: column; overflow: hidden; }
+/* photo banner, darkened towards the card so the gold logo disc reads where it overlaps */
+.svc-photo { position: relative; aspect-ratio: 16 / 9; }
+.svc-photo img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.85); }
+.svc-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(12, 10, 8, 0.05) 40%, rgba(12, 10, 8, 0.9)); }
+.svc-body { flex: 1; display: flex; flex-direction: column; gap: 8px; padding: 0 24px 22px; }
+.services .svc-logo { position: relative; z-index: 1; display: grid; place-items: center; width: 64px; height: 64px; margin: -32px 0 6px; border-radius: 50%;
+  background: radial-gradient(circle at 50% 28%, #f8eed4, #e2c98f 60%, #b8924a); box-shadow: inset 0 0 0 1px rgba(243, 217, 149, 0.8), 0 8px 20px rgba(0, 0, 0, 0.5); }
+.services .svc-logo img { width: 62%; height: auto; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.25)); }
+/* pale metal logos (Spaceablers, Techablers) need a firmer shadow on the gold disc, as in the orbit */
+.services .svc-logo img[data-shadow] { width: 70%; filter: drop-shadow(0 1px 1px rgba(60, 38, 10, 0.55)) drop-shadow(0 3px 6px rgba(60, 38, 10, 0.3)); }
+.services p:not(.by) { font-size: 0.92rem; line-height: 1.55; color: var(--muted); }
+.services .by { margin-top: auto; padding-top: 6px; }
+
+/* case studies: wide rows, meta | story | result */
+.case-list { display: grid; gap: 14px; margin: 40px 0 0; padding: 0; list-style: none; }
+.case { display: grid; gap: 18px; padding: 26px 24px; }
+@media (min-width: 900px) { .case { grid-template-columns: 180px 1fr 220px; gap: 32px; padding: 30px 32px; } }
+.case-meta { display: flex; flex-direction: column; gap: 6px; }
+.case-photo { margin-bottom: 8px; overflow: hidden; border-radius: 12px; aspect-ratio: 16 / 9; box-shadow: inset 0 0 0 1px var(--line); }
+.case-photo img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.85); }
+@media (min-width: 900px) { .case-photo { aspect-ratio: 4 / 3; } }
+.case-meta .num { font: 500 2.4rem/1 var(--serif); color: var(--gold); }
+.case-meta .where { font-size: 0.86rem; color: var(--muted); }
+.case-meta .by { margin-top: auto; padding-top: 6px; }
+.case-body h3 { font: 500 1.6rem/1.2 var(--serif); }
+.case-body .client { margin-top: 6px; font-size: 0.84rem; font-style: italic; color: var(--muted); }
+.case-body dl { margin: 16px 0 0; display: grid; gap: 12px; }
+.case-body dt { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+.case-body dd { margin: 4px 0 0; font-size: 0.93rem; line-height: 1.55; color: rgba(239, 231, 214, 0.78); }
+.case-result { padding-top: 18px; border-top: 1px solid rgba(212, 174, 92, 0.16); }
+@media (min-width: 900px) { .case-result { padding: 0 0 0 28px; border-top: 0; border-left: 1px solid rgba(212, 174, 92, 0.16); display: flex; flex-direction: column; justify-content: center; } }
+.case-result .big { font: 500 2.1rem/1.1 var(--serif); color: var(--gold-hi); }
+.case-result p:not(.big) { margin-top: 8px; font-size: 0.88rem; line-height: 1.5; color: var(--text); }
+
+/* method: five steps */
+.process { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; margin: 40px 0 0; padding: 0; list-style: none; }
+.process > li { display: flex; flex-direction: column; gap: 8px; padding: 22px; }
+.process .num { font: 500 1.8rem/1 var(--serif); color: var(--gold); }
+.process h3 { font-size: 1rem; }
+.process p { font-size: 0.88rem; line-height: 1.5; color: var(--muted); }
+
+/* icons (gold line glyphs in a ringed disc) and round flags */
+.ico { flex: none; display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%;
+  background: radial-gradient(circle at 50% 30%, #1d1710, #0b0907 70%); box-shadow: inset 0 0 0 1px var(--line); }
+.ico svg { width: 22px; height: 22px; fill: none; stroke: var(--gold); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.flag { flex: none; width: 18px; height: 18px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1px rgba(243, 217, 149, 0.35); }
+.flag-lg { width: 34px; height: 34px; box-shadow: 0 0 0 1px rgba(243, 217, 149, 0.5), 0 4px 12px rgba(0, 0, 0, 0.5); }
+.chips li { display: inline-flex; align-items: center; gap: 8px; padding-left: 7px; }
+.rl-head { display: flex; align-items: center; gap: 14px; }
+.hub-name { display: flex; align-items: center; gap: 12px; }
+.case-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.process .case-top { margin-bottom: 4px; }
+
+.cta { padding-bottom: 80px; }
+.cta .btn { margin-top: 28px; }
+.sub-footer { padding: 28px var(--gutter) calc(env(safe-area-inset-bottom, 0px) + 28px); text-align: center; border-top: 1px solid rgba(212, 174, 92, 0.14); }
+.sub-footer .legal-links { margin-top: 0; }
 
 /* ---------- contact ---------- */
 .contact h2 { margin-top: 14px; font-weight: 400; font-size: clamp(1.8rem, 4.2vw, 2.8rem); line-height: 1.15; text-wrap: balance; }

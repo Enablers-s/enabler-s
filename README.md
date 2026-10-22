@@ -48,3 +48,21 @@ Already set up for production:
 
 ## Running locally
 No build step. Open `index.html` in a browser, or serve the folder (e.g. `python3 -m http.server`).
+
+## Image credits
+Service photos in `assets/photos/` are from Pexels, free for commercial use under the [Pexels License](https://www.pexels.com/license/) (no attribution required; listed here as a courtesy):
+
+| File | Pexels photo |
+|---|---|
+| licensing.webp | https://www.pexels.com/photo/6358840/ |
+| banking.webp | https://www.pexels.com/photo/7447655/ |
+| contracts.webp | https://www.pexels.com/photo/8730987/ |
+| visas.webp | https://www.pexels.com/photo/4922356/ |
+| workspace.webp | https://www.pexels.com/photo/3801167/ |
+| technology.webp | https://www.pexels.com/photo/17489156/ |
+
+Country flags in `assets/flags/` are from [flag-icons](https://github.com/lipis/flag-icons) v7.2.3 (MIT License).
+
+Case study photos (also Pexels): tax.webp https://www.pexels.com/photo/6863183/ · retail.webp https://www.pexels.com/photo/32367382/ · procurement.webp https://www.pexels.com/photo/5156696/ · gulf-skyline.webp https://www.pexels.com/photo/19894545/ (the case studies also reuse licensing, contracts, visas and technology).
+
+Global page background video (`assets/video/globe-*.mp4`): Pexels video https://www.pexels.com/video/20481078/ (Pexels License), trimmed to 20 s and re-encoded for the web.
