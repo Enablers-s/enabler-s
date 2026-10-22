@@ -66,3 +66,4 @@ Country flags in `assets/flags/` are from [flag-icons](https://github.com/lipis/
 Case study photos (also Pexels): tax.webp https://www.pexels.com/photo/6863183/ · retail.webp https://www.pexels.com/photo/32367382/ · procurement.webp https://www.pexels.com/photo/5156696/ · gulf-skyline.webp https://www.pexels.com/photo/19894545/ (the case studies also reuse licensing, contracts, visas and technology).
 
 Global page background video (`assets/video/globe-*.mp4`): Pexels video https://www.pexels.com/video/20481078/ (Pexels License), trimmed to 20 s and re-encoded for the web.
+Valora and Brandablers service photos (Pexels): trade.webp https://www.pexels.com/photo/36652842/ · events.webp https://www.pexels.com/photo/31129059/

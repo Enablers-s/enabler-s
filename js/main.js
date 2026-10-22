@@ -156,16 +156,27 @@
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   const arrival = location.hash && document.getElementById(location.hash.slice(1));
   if (location.hash) history.replaceState(null, '', location.pathname + location.search);
-  if (arrival) arrival.scrollIntoView();
-  else window.scrollTo(0, 0);
-  // In-page links (Contact, Get in touch) scroll smoothly without adding #contact to the address
+  const land = () => (arrival ? arrival.scrollIntoView() : window.scrollTo(0, 0));
+  land();
+  // Some browsers (Safari in particular) restore or nudge the scroll position after the page finishes
+  // loading, or when it comes back from the back/forward cache. Land again, unless the visitor has
+  // already started scrolling themselves.
+  let visitorScrolled = false;
+  ['wheel', 'touchmove', 'keydown', 'pointerdown'].forEach((t) =>
+    window.addEventListener(t, () => { visitorScrolled = true; }, { once: true, passive: true }));
+  window.addEventListener('load', () => { if (!visitorScrolled) land(); });
+  window.addEventListener('pageshow', (e) => { if (e.persisted) window.scrollTo(0, 0); });
+  // In-page links (Contact, Get in touch) scroll smoothly without adding #contact to the address;
+  // the Enabler-S name (#hero) goes right back to the very top
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a[href^="#"]');
     if (!a || a.getAttribute('href').length < 2) return;
     const target = document.getElementById(a.getAttribute('href').slice(1));
     if (!target) return;
     e.preventDefault();
-    target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+    const behavior = reduceMotion ? 'auto' : 'smooth';
+    if (target.id === 'hero') window.scrollTo({ top: 0, behavior });
+    else target.scrollIntoView({ behavior });
   });
 
   /* ---------- cookies & terms notice ---------- */
