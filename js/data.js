@@ -7,7 +7,7 @@
 // Each brand is its own website (its own repo and Vercel project). On the live site the discs link to
 // the deployed brand sites; opened from disk or localhost they link to the side-by-side local folders.
 // To move a brand to its own domain, change its line in BRAND_SITES_LIVE.
-// Finablers, Trustablers and Brandora are left out until their sites are deployed (their old Vercel URLs return 404),
+// Finablers, Trustablers and Brandablers are left out until their sites are deployed (their old Vercel URLs return 404),
 // so their discs only select instead of opening a dead page.
 const BRAND_SITES_LIVE = {
   bizablers: 'https://bizablers.vercel.app/',
@@ -25,8 +25,8 @@ const BRAND_SITES = (location.protocol === 'file:' || ['localhost', '127.0.0.1']
 
 const PILLARS = [
   {
-    id: 'licensing', icon: 'licensing', logo: 'assets/bizablers-mark.webp', logoSize: 68, logoNudge: 14, site: BRAND_SITES.bizablers, short: 'Bizablers', about: 'Licensing & strategic advisory',
-    title: 'Global Licensing & Strategic Advisory', brand: 'Bizablers',
+    id: 'licensing', icon: 'licensing', logo: 'assets/bizablers-mark.webp', logoSize: 68, logoNudge: 14, site: BRAND_SITES.bizablers, short: 'Bizabler-S', about: 'Licensing & strategic advisory',
+    title: 'Global Licensing & Strategic Advisory', brand: 'Bizabler-S',
     line: 'Set up, structure and scale in any market.',
     highlights: ['Company formation & licensing', 'Mainland, free zone & international structuring', 'Business plans, feasibility studies & pitch decks', 'Joint ventures, M&A and multi-country expansion'],
     services: ['Company Formation & Licensing', 'Mainland, Free Zone & International Structuring', 'Municipality & Government Approvals', 'Business Plans & Feasibility Studies', 'Company Profiles & Corporate Presentations', 'Pitch Deck & Investor Documentation Preparation', 'Operational, Sales & Business Model Structuring', 'Partnership & B2B Growth Strategy', 'Joint Venture Structuring', 'Multi-Country Expansion & Branch Setup Support', 'Mergers & Acquisitions Advisory (M&A)', 'Franchise Model Development & Documentation', 'Business Insurance Solutions'],
@@ -67,8 +67,8 @@ const PILLARS = [
     services: ['HR Policy Development & Advisory Services', 'Payroll Management, Employee Handbook & HR Documentation', 'Recruitment, Talent Acquisition & Global Staffing', 'Workforce Planning & Organizational Structure', 'Employee Training, Performance Management & Exit Interviews', 'Study Abroad & Student Visa Assistance', 'Work Permits, Employment Visas & Overseas Employment', 'Permanent Residency (PR) Solutions', 'Family, Spouse, Dependent, Tourist & Visitor Visa Services', 'Business & Investor Immigration, Golden Visa, Citizenship & Second Passport Solutions'],
   },
   {
-    id: 'branding', icon: 'branding', logo: 'assets/brandora-mark.webp', site: BRAND_SITES.brandora, short: 'Brandora', about: 'Branding, PR & events',
-    title: 'Branding, PR & Event Support', brand: 'Brandora',
+    id: 'branding', icon: 'branding', logo: 'assets/brandora-mark.webp', site: BRAND_SITES.brandora, short: 'Brandablers', about: 'Branding, PR & events',
+    title: 'Branding, PR & Event Support', brand: 'Brandablers',
     line: 'Brands, campaigns and events that open doors.',
     highlights: ['Brand strategy and visual identity', 'PR, media relations and reputation', 'Content, social media and campaigns', 'Conferences, exhibitions and launches'],
     services: ['Brand Strategy, Positioning, Identity & Brand Guidelines', 'Corporate Branding, Logo Design, Rebranding & Visual Identity', 'Marketing Strategy, Campaign Planning, Digital Branding & Social Media', 'Public Relations (PR), Media Relations, Press Releases & Reputation Management', 'Corporate Communications, Content Creation, Creative Design & Marketing Collateral', 'Corporate Events, Conferences, Exhibitions, Product Launches, Sponsorships & Networking Events', 'Printing, Promotional Materials, Corporate Merchandise, Brand Partnerships & Influencer Relations'],
