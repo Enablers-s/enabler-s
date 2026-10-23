@@ -39,7 +39,8 @@
     <button class="tab" id="tab-${p.id}" aria-pressed="false" tabindex="-1" type="button" aria-describedby="tip-${p.id}">
       <span class="disc${p.logo ? ' has-logo' : ''}${p.logoBg ? ' ' + p.logoBg : ''}"><span class="num">${pad(i + 1)}</span>${p.logo
         ? `<img class="mark" src="${p.logo}" alt="" width="256" height="256"${p.logoSize || p.logoNudge ? ` style="${p.logoSize ? `width:${p.logoSize}%;` : ''}${p.logoNudge ? `margin-top:${p.logoNudge}%;` : ''}"` : ''}${p.logoShadow ? ` data-shadow="${p.logoShadow}"` : ''}>`
-        : `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[p.icon]}</svg>`}</span>
+        : `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[p.icon]}</svg>`}${(p.subs || []).map((s, k) =>
+          `<span class="sub-disc sub-${k + 1}" title="${s.name}"><img src="${s.logo}" alt="${s.name}" width="256" height="256"></span>`).join('')}</span>
       <span class="label">${p.short}</span>
       <span class="about">${p.about}</span>
       <span class="tip" id="tip-${p.id}" role="tooltip">${p.line}</span>
@@ -129,9 +130,18 @@
       <span class="bl-logo"><img src="${p.logo}" alt="" width="256" height="256"${p.logoShadow ? ` data-shadow="${p.logoShadow}"` : ''}></span>
       <span class="bl-text"><b>${p.short}</b><small>${p.about}</small></span>
       <span class="bl-go" aria-hidden="true">${p.site ? '↗' : ''}</span>`;
-    return p.site
+    const row = p.site
       ? `<li><a href="${p.site}">${inner}</a></li>`
       : `<li><div>${inner}</div></li>`;
+    // each sub-brand gets its own indented row (twice indented for level 2), linking to the parent brand's site
+    const subs = (p.subs || []).map((s) => {
+      const body = `
+        <span class="bl-logo"><img src="${s.logo}" alt="" width="256" height="256"></span>
+        <span class="bl-text"><b>${s.name}</b><small>${s.about}</small></span>
+        <span class="bl-go" aria-hidden="true">${p.site ? '↗' : ''}</span>`;
+      return `<li class="bl-sub${s.level === 2 ? ' bl-sub2' : ''}">${p.site ? `<a href="${p.site}">${body}</a>` : `<div>${body}</div>`}</li>`;
+    }).join('');
+    return row + subs;
   }).join('');
 
   /* ---------- hero video ---------- */
@@ -192,11 +202,7 @@
   $('cookie-settings').addEventListener('click', showConsent);
   if (!readConsent()) showConsent();
 
-  /* ---------- contact ---------- */
-  $('c-email').textContent = CONTACT.email;
-  $('c-email').href = `mailto:${CONTACT.email}`;
-  $('c-phone').textContent = CONTACT.phone;
-  $('c-phone').href = `tel:${CONTACT.phone.replace(/\s/g, '')}`;
-  $('c-address').textContent = CONTACT.address;
+  /* ---------- footer year ---------- */
+  // Contact details now live on contact.html (static), so the home page only fills in the year
   $('year').textContent = new Date().getFullYear();
 })();

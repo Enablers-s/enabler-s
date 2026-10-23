@@ -91,7 +91,7 @@ em { font: italic 500 1.08em var(--serif); color: var(--gold-hi); }
 
 /* ---------- hero ---------- */
 .hero { position: relative; isolation: isolate; overflow: hidden; min-height: 100svh; gap: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
-  padding: 96px var(--gutter) 48px; }
+  padding: 84px var(--gutter) 20px; }
 /* Background video: fixed behind the whole page (hero and contact), then darken the centre (behind the logo) and
    fade the edges into the page so the gold orbit and text stay readable */
 .hero-video { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: #0d0a06 url("../assets/video/boardroom-poster.jpg") center / cover no-repeat; }
@@ -130,14 +130,22 @@ em { font: italic 500 1.08em var(--serif); color: var(--gold-hi); }
   .bl-text b { font-weight: 500; color: var(--gold-hi); letter-spacing: 0.04em; }
   .bl-text small { font-size: 0.8rem; color: var(--muted); }
   .bl-go { margin-left: auto; color: var(--gold); font-size: 1.1rem; }
+  /* sub-brand row sits indented under its parent, joined by a short gold rule */
+  .brand-list .bl-sub { position: relative; margin: -2px 0 0 28px; }
+  .brand-list .bl-sub::before { content: ""; position: absolute; left: -16px; top: -10px; width: 12px; height: 38px;
+    border: solid var(--line); border-width: 0 0 1px 1px; border-bottom-left-radius: 8px; }
+  .brand-list .bl-sub .bl-logo { width: 40px; height: 40px; background: radial-gradient(circle at 50% 30%, #fffaf0, #efe2c2); }
+  .brand-list .bl-sub .bl-logo img { width: 70%; }
+  .brand-list .bl-sub2 { margin-left: 56px; }
   .scroll-cue { margin-top: 22px; }
 }
 .scroll-cue { margin-top: 14px; font-size: 0.85rem; letter-spacing: 0.12em; color: var(--muted); text-decoration: none; }
 .scroll-cue .arrow { display: inline-block; margin-left: 4px; animation: nudge 2s ease-in-out infinite; }
-@keyframes nudge { 50% { transform: translateY(4px); } }
+@keyframes nudge { 50% { transform: translateX(4px); } }
 
 /* Orbit: discs are placed on a circle of radius 40% by main.js (--x/--y) and rotate slowly */
-.orbit { container-type: inline-size; position: relative; width: min(720px, 94vw, max(80svh, 460px)); aspect-ratio: 1; margin: 8px auto 4px; }
+/* the home page is a single screen: the orbit shrinks with the window height so the tagline and links still fit */
+.orbit { container-type: inline-size; position: relative; width: min(720px, 94vw, max(calc(100svh - 350px), 340px)); aspect-ratio: 1; margin: 8px auto 4px; }
 .orbit-rings { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .orbit-rings circle { fill: none; stroke: rgba(212, 174, 92, 0.16); stroke-width: 0.15; }
 .orbit-rings .dash { stroke: rgba(212, 174, 92, 0.42); stroke-width: 0.22; stroke-dasharray: 0.6 1.4;
@@ -202,6 +210,12 @@ em { font: italic 500 1.08em var(--serif); color: var(--gold-hi); }
 .tab[aria-pressed="true"] svg { stroke: #1a1206; }
 .tab[aria-pressed="true"] .num { color: #4a3510; }
 .tab[aria-pressed="true"] .num { color: #4a3510; }
+/* sub-brand (Public-Private Alliance under Bizabler-S): a small ivory disc riding on the parent disc's upper right */
+.tab .sub-disc { position: absolute; right: -16%; top: -10%; z-index: 1; display: grid; place-items: center; width: 44%; aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle at 50% 30%, #fffaf0, #efe2c2); box-shadow: 0 0 0 1.5px var(--gold), 0 4px 10px rgba(0, 0, 0, 0.5); }
+.tab .sub-disc img { width: 70%; height: auto; }
+/* a second sub-brand (Gocha Style under UG Depot) rides just below the first, slightly smaller */
+.tab .sub-disc.sub-2 { right: -30%; top: 34%; width: 38%; }
 
 
 /* ---------- global & case studies pages ---------- */
@@ -317,6 +331,14 @@ em { font: italic 500 1.08em var(--serif); color: var(--gold-hi); }
 .case-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .process .case-top { margin-bottom: 4px; }
 
+/* contact page: three detail cards */
+.contact-page { padding-bottom: 96px; }
+.contact-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 44px 0 0; }
+.contact-cards > div { padding: 24px; border-radius: 16px; text-align: left; background: rgba(12, 10, 8, 0.86); box-shadow: inset 0 0 0 1px var(--line); backdrop-filter: blur(6px); }
+.contact-cards dt { font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); }
+.contact-cards dd { margin: 10px 0 0; color: var(--muted); line-height: 1.55; }
+.contact-cards dd a { color: var(--text); text-decoration: none; font-size: 1.05rem; }
+.contact-cards dd a:hover { color: var(--gold-hi); }
 .cta { padding-bottom: 80px; }
 .cta .btn { margin-top: 28px; }
 .sub-footer { padding: 28px var(--gutter) calc(env(safe-area-inset-bottom, 0px) + 28px); text-align: center; border-top: 1px solid rgba(212, 174, 92, 0.14); }
@@ -337,6 +359,9 @@ em { font: italic 500 1.08em var(--serif); color: var(--gold-hi); }
 .linklike { padding: 0; border: 0; background: none; font: inherit; cursor: pointer; }
 .legal-links span { color: rgba(239, 231, 214, 0.3); }
 .fine { margin-top: 16px; font-size: 0.8rem; color: rgba(239, 231, 214, 0.4); }
+
+/* legal links at the foot of the one-screen home page */
+.home-legal { margin-top: 14px; gap: 8px; font-size: 0.76rem; color: rgba(239, 231, 214, 0.45); text-shadow: 0 2px 10px #000; }
 
 /* ---------- cookies & terms notice ---------- */
 .consent { position: fixed; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 16px); z-index: 60; width: min(760px, calc(100% - 32px));

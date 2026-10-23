@@ -2,7 +2,8 @@
 // `short` is the label under each circular tab and `about` the few words beneath it; `icon` picks a glyph from ICONS in main.js,
 // or `logo` shows a brand mark image in the disc instead. `site` makes clicking the disc open that brand's website;
 // `logoSize` (% of the disc) enlarges a logo and `logoNudge` (% of the disc) moves it down, clear of the disc number; `logoBg: 'dark'` (slate) or 'black' (warm black)
-// puts a light logo on a dark disc.
+// puts a light logo on a dark disc. `subs` lists sub-brands: each gets a small disc on the pillar's disc and an indented row in
+// the phone list, linking to the pillar's site; `level: 2` marks a brand that sits under the sub-brand before it.
 
 // Each brand is its own website (its own repo and Vercel project). On the live site the discs link to
 // the deployed brand sites; opened from disk or localhost they link to the side-by-side local folders.
